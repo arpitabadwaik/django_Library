@@ -23,5 +23,9 @@ urlpatterns = [
     url(r'^sign-in/', 'loginapp.views.sign_in'),
     url(r'^sign-up/', 'loginapp.views.sign_up'),
     url(r'^dashboard/', 'loginapp.views.open_dashboard'),
+    url(r'^user-detail/', 'loginapp.views.user_details'),
+    url(r'^show-user-data/', 'loginapp.views.show_user_data'),
+    url(r'^open-modal/', 'loginapp.views.open_modal'),
+    url(r'^base/', 'loginapp.views.open_base_page'),
     url(r'^admin/', include(admin.site.urls))
 ]
