@@ -29,6 +29,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <meta content="" name="author"/>
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet"
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet"
           type="text/css"/>
     <link href="{% static 'assets/global/plugins/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet"
           type="text/css"/>
@@ -65,14 +66,15 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- BEGIN HEADER INNER -->
     <div class="page-header-inner ">
         <!-- BEGIN LOGO -->
-        <div class="page-logo">
+        <div class="col-md-2"></div>
+        <!--<div class="page-logo">
             <a href="index.html">
                 <img src="{% static 'assets/layouts/layout2/img/logo-default.png' %}" alt="logo" class="logo-default"/>
             </a>
             <div class="menu-toggler sidebar-toggler">
-                <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
+                &lt;!&ndash; DOC: Remove the above "hide" to enable the sidebar toggler button on header &ndash;&gt;
             </div>
-        </div>
+        </div>-->
         <!-- END LOGO -->
         <!-- BEGIN RESPONSIVE MENU TOGGLER -->
         <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse"
@@ -532,7 +534,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         <span class="arrow"></span>
                     </a>
                 </li>
-                <li class="nav-item  ">
+                <li class="nav-item start ">
                     <a href="/user-detail/" class="nav-link nav-toggle">
                         <i class="icon-user"></i>
                         <span class="title">User</span>
@@ -649,7 +651,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         <i class="fa fa-angle-right"></i>
                     </li>
                     <li>
-                        <span>Datatables</span>
+                        <span>User Details</span>
                     </li>
                 </ul>
                 <div class="page-toolbar">
@@ -705,7 +707,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="btn-group">
-                                            <button id="sample_editable_1_new" class="btn green"> Add New
+                                            <button id="add_new_user" class="btn green"> Add New
                                                 <i class="fa fa-plus"></i>
                                             </button>
                                         </div>
@@ -1339,7 +1341,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             <li> Failed Email Attempts
                                 <input class="form-control input-inline input-sm input-small" value="5"/></li>
                             <li> Secondary SMTP Port
-                                <input class="form-control input-inline input-sm input-small" value="3560"/></li>
+                                <input class="formform-control input-inline input-sm input-small" value="3560"/></li>
                             <li> Notify On System Error
                                 <input type="checkbox" class="make-switch" checked data-size="small"
                                        data-on-color="danger" data-on-text="ON" data-off-color="default"
@@ -1369,15 +1371,15 @@ License: You must have a valid license purchased only from themeforest(the above
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">Add Bill Schedule</h4></div>
-            <form id="add_schedule_form" method="post">
+                <h4 class="modal-title">Add User</h4></div>
+            <form id="save_user_data_form" method="post">
                 <div class="modal-body">
                     <div class="scroller" style="height:100%;" data-always-visible="1" data-rail-visible1="1">
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group form-md-line-input has-success show_error"
-                                         id="error_billMonth">
+                                         id="error_first_name">
                                         <label class="control-label">First Name *</label>
                                         <input type="text" min="1" class="form-control" id="first_name"
                                                name="first_name">
@@ -1385,48 +1387,60 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group form-md-line-input has-success show_error"
-                                         id="error_zone_add">
+                                         id="error_last_name">
                                         <label class="control-label zonelbl">Last Name *</label>
                                         <input type="text" class="form-control" id="last_name" name="last_name">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group form-md-line-input has-success show_error"
-                                         id="error_billCycleCode">
-                                        <label class="control-label billcyclelbl">E mail*</label><br>
+                                         id="error_email">
+                                        <label class="control-label email" id="lable_email">E mail*</label><br>
                                         <input type="text" class="form-control" id="email" name="email">
                                     </div>
                                 </div>
                             </div>
-                            <hr>
                             <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group form-md-line-input has-success input-group show_error"
-                                         data-date-format="dd/mm/yyyy" data-date-viewmode="years"
-                                         data-date-start-date="d" id="error_startdate">
-                                        <label class="control-label">Address *</label>
-                                        <input type="text" class="form-control" id="address" name="address">
+                                <div class="col-md-4" id="div_password">
+                                    <div class="form-group form-md-line-input has-success show_error"
+                                         id="error_password">
+                                        <label class="control-label" id="label_password"> Password *</label>
+                                        <input type="password" min="1" class="form-control" id="password"
+                                               name="password">
                                     </div>
                                 </div>
-
+                                <div class="col-md-4" id="div_repassword">
+                                    <div class="form-group form-md-line-input has-success show_error"
+                                         id="error_repassword">
+                                        <label class="control-label zonelbl" id="label_repassword"> Re Type Password*</label>
+                                        <input type="password" class="form-control" id="repassword" name="repassword">
+                                    </div>
+                                </div>
+                            </div>
+                           <div class="row">
                                 <div class="col-md-4">
-                                    <div class="form-group form-md-line-input has-success input-group input-medium show_error"
-                                         data-date-format="dd/mm/yyyy" data-date-viewmode="years" id="error_vstartdate">
-                                        <label class="control-label">City *</label>
+                                    <div class="form-group form-md-line-input has-success show_error"
+                                         id="error_address">
+                                        <label class="control-label">Address *</label>
+                                        <input type="text" min="1" class="form-control" id="address"
+                                               name="address">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group form-md-line-input has-success show_error"
+                                         id="error_city">
+                                        <label class="control-label zonelbl">City *</label>
                                         <input type="text" class="form-control" id="city" name="city">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="form-group form-md-line-input has-success input-group input-medium show_error"
-                                         data-date-format="dd/mm/yyyy" data-date-viewmode="years"
-                                         id="error_punchingstartdate">
-                                        <label class="control-label">Country *</label>
-                                        <input type="text" class="form-control" id="country"
-                                               name="country">
+                                    <div class="form-group form-md-line-input has-success show_error"
+                                         id="error_country">
+                                        <label class="control-label country" id="lable_country">Country*</label><br>
+                                        <input type="text" class="form-control" id="country" name="country">
                                     </div>
                                 </div>
                             </div>
-                            <hr>
                         </div>
                     </div>
                 </div>
@@ -1434,7 +1448,7 @@ License: You must have a valid license purchased only from themeforest(the above
             </form>
             <div class="modal-footer">
                 <button type="button" data-dismiss="modal" class="btn dark btn-outline">Cancel</button>
-                <button type="button" class="btn green btn-outline" id="save_bill_schedule_btn">
+                <button type="button" class="btn green btn-outline" id="save_user_data">
                     Submit
                 </button>
             </div>
@@ -1488,6 +1502,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="{% static 'assets/layouts/layout2/scripts/layout.min.js' %}" type="text/javascript"></script>
 <script src="{% static 'assets/layouts/layout2/scripts/demo.min.js' %}" type="text/javascript"></script>
 <script src="{% static 'assets/layouts/global/scripts/quick-sidebar.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'custom-js/bootbox.min.js' %}" type="text/javascript"></script>
 <!-- END THEME LAYOUT SCRIPTS -->
 </body>
 

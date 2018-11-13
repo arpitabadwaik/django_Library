@@ -294,7 +294,24 @@ var Login = function () {
         }
     };
 
+    $('#save_user_data').click(function(){
+        $.ajax({
+            type: 'POST',
+            url: '/sign-up/',
+            data: $('.register-form').serialize(),
+            success: function(response){
+                alert('You have Registered Successfully!');
+            },
+            error: function(response){
+                alert('error');
+            },
+        });
+    })
+
+
 }();
+
+
 
 jQuery(document).ready(function() {
     Login.init();

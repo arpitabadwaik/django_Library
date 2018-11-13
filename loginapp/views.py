@@ -136,10 +136,53 @@ def open_modal(request):
         'first_name': edit_data.first_name,
         'last_name': edit_data.last_name,
         'email': edit_data.email,
+        'password': edit_data.password,
+        'repassword': edit_data.password,
         'address': edit_data.address,
         'city': edit_data.city,
         'country': edit_data.country,
         'success': 'true'
     }
+    print '//////////////////////////////////////', data
     print '----request out | login view.py | open_modal----'
+    return HttpResponse(json.dumps(data), content_type='application/json')
+
+@csrf_exempt
+def save_modal_data(request):
+    sid = transaction.savepoint()
+    try:
+        print '----request in | login view.py | save_modal_data----'
+        if not request.POST.get('data_id'):
+            save_user= UserData(
+                    first_name=request.POST.get('first_name'),
+                    last_name=request.POST.get('last_name'),
+                    email=request.POST.get('email'),
+                    username=request.POST.get('email'),
+                    address=request.POST.get('address'),
+                    city=request.POST.get('city'),
+                    country=request.POST.get('country'),
+            )
+            # save data
+            save_user.save()
+            # to save passowrd (encrypted)
+            save_user.set_password(request.POST.get('password'))
+            save_user.save()
+            # transaction commit
+            transaction.savepoint_commit(sid)
+        else:
+            update_data = UserData.objects.get(id=request.POST.get('data_id'))
+            update_data.first_name = request.POST.get('first_name')
+            update_data.last_name = request.POST.get('last_name')
+            update_data.email = request.POST.get('email')
+            update_data.set_password(request.POST.get('password'))
+            update_data.address = request.POST.get('address')
+            update_data.city = request.POST.get('city')
+            update_data.country = request.POST.get('country')
+            update_data.save()
+        data = {'success': 'true'}
+    except Exception as exc:
+        print "Exception----------------",exc
+        transaction.rollback(sid)
+
+    print '----request out | login view.py | save_modal_data----'
     return HttpResponse(json.dumps(data), content_type='application/json')
